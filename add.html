@@ -37,6 +37,7 @@
         let response = await fetch(host + "/ducks", request);
         if (response.status == 200)
         {
+          let result = await submitTheImage();
           message = "The duck was added successfully!";
         }
         else
@@ -46,6 +47,21 @@
         }
 
         alert(message);
+      }
+
+      async function submitTheImage()
+      {
+        let duckId = document.getElementById("id").value;
+        let imageInput = document.getElementById("imageInput");
+        let formData = new FormData();
+        formData.append("file", imageInput.files[0]);
+        let request = {
+          method: "POST",
+          body: formData
+        };
+        let response = await fetch(host + "/ducks/" +duckId + "/image/", request);
+        let result = await response.jsn();
+        return result;
       }
     </script>
   </body>

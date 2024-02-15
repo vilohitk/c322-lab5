@@ -45,13 +45,19 @@
     </table>
 
     <script>
+      /*
        let ducks = [
         { id: 1, type: "Mallard" },
         { id: 2, type: "Redhead" },
         { id: 3, type: "Decoy" },
       ];
+      */
 
       async function search() {    
+        if (ducks.length == 0)
+        {
+          ducks = await getAll();
+        }
 
         let duckType = document.getElementById("type").value;
         let table = document.getElementById("result");
@@ -71,6 +77,15 @@
             table.appendChild(row);
           }
         }
+      }
+
+      //changes
+      let ducks = [];
+
+      async function getAll()
+      {
+        let host = "http://localhost:8080";
+        //TODO
       }
     </script>
   </body>
